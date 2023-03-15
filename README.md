@@ -4,7 +4,7 @@
 
 > #### [ZoeDepth: Zero-shot Transfer by Combining Relative and Metric Depth](https://arxiv.org/abs/2302.12288) with YOLOv5
 
-![teaser](assets/zoedepth-teaser.png)
+![teaser](https://github.com/bensonbs/YOLOv5-ZoeDepth-ZST/blob/main/Demo/zoedepth-teaser.png)
 
 ## **Setup & Usage FastAPI**
 
