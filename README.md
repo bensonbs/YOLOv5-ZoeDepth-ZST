@@ -8,7 +8,7 @@
 
 ## **Setup & Usage FastAPI**
 
-```bash
+```shell
 git clone https://github.com/bensonbs/YOLOv5-ZoeDepth-ZST
 
 setup.bat
