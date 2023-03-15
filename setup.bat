@@ -27,7 +27,7 @@ if not exist models (
 if exist %YOLO_MODEL_PATH% (
     echo %YOLO_MODEL_PATH% already exists.
 ) else (
-    echo Downloading DEPTH MODEL ...
+    echo Downloading YOLO MODEL ...
     gdown https://drive.google.com/uc?id=%YOLO_MODEL_ID% -O %YOLO_MODEL_PATH%
     echo Download complete.
 )
