@@ -4,31 +4,30 @@ set VENV_NAME=zolo_venv
 set PYTHON_EXE=python
 set FOLDER_NAME=whl
 set VENV_PATH=package.zip
-set VENV_ID = 1fPWyPXUjjAtv4O102O-FyH9aJqtk8G3o
+set VENV_ID=1fPWyPXUjjAtv4O102O-FyH9aJqtk8G3o
 set DEPTH_MODEL_ID=1frT2jhdzcRee2Dg_P2bk4vfbpHzGdWcq
 set DEPTH_MODEL_PATH=hub\checkpoints\ZoeD_M12_N.pt
 
 echo Creating virtual environment: %VENV_NAME% with Python: %PYTHON_EXE%
 %PYTHON_EXE% -m venv %VENV_NAME%
 
-
 echo Virtual environment created successfully.
 
-pip install down
+pip install gdown
 
 if not exist hub\checkpoints (
     mkdir hub\checkpoints
 )
 
-if exist !DEPTH_MODEL_PATH! (
-    echo !DEPTH_MODEL_PATH! already exists.
+if exist %DEPTH_MODEL_PATH% (
+    echo %DEPTH_MODEL_PATH% already exists.
 ) else (
     echo Downloading DEPTH MODEL ...
-    gdown https://drive.google.com/uc?id=%DEPTH_MODEL_ID% -O !DEPTH_MODEL_PATH!
+    gdown https://drive.google.com/uc?id=%DEPTH_MODEL_ID% -O %DEPTH_MODEL_PATH%
     echo Download complete.
 )
 
-if exist %VENV_ID% (
+if exist %VENV_PATH% (
     echo %VENV_PATH% already exists.
 ) else (
     echo Downloading %VENV_PATH%...
@@ -40,11 +39,11 @@ if not exist whl (
     mkdir whl
 )
 
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "& {Expand-Archive -Force package.zip whl}"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "& {Expand-Archive -Force package.zip .}"
 
 echo whl.zip has been unzipped to the whl folder.
 
-pip install --no-index --find-links ./whl/package -r requirements.txt
+pip install --no-index --find-links ./whl -r requirements.txt
 
 echo finish.
 pause
