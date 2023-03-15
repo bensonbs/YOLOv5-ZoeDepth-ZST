@@ -13,6 +13,7 @@ echo Creating virtual environment: %VENV_NAME% with Python: %PYTHON_EXE%
 
 echo Virtual environment created successfully.
 
+call %VENV_NAME%\Scripts\activate
 pip install gdown
 
 if not exist hub\checkpoints (
