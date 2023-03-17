@@ -4,11 +4,11 @@
 
 > #### [ZoeDepth: Zero-shot Transfer by Combining Relative and Metric Depth](https://arxiv.org/abs/2302.12288) with YOLOv5
 
-![teaser](assets/zoedepth-teaser.png)
+![teaser](https://github.com/bensonbs/YOLOv5-ZoeDepth-ZST/blob/main/Demo/zoedepth-teaser.png)
 
 ## **Setup & Usage FastAPI**
 
-```bash
+```shell
 git clone https://github.com/bensonbs/YOLOv5-ZoeDepth-ZST
 
 setup.bat
@@ -18,6 +18,10 @@ run_servers.bat
 ```
 
 ```python
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f51c31031cc3491f4328f3e6fe266bf454c6855
 # API Demo
 file = 'Demo/3.png'
 
