@@ -31,7 +31,7 @@ app = FastAPI()
 #測試連接
 @app.post("/")
 def read_root():
-    models = os.listdir('ckpt')
+    models = os.listdir('models')
     return {model:'available' for model in models}
 
 
