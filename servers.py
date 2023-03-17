@@ -18,13 +18,21 @@ def base64_to_image(base64_str, image_path=None):
         img.save(image_path)
     return img
 
+def load_model(Model_name):
+    return torch.hub.load(
+        repo_or_dir = 'yolov5',
+        model = 'custom', 
+        path=f'models/{Model_name}', 
+        source='local')
+
 #設定一個FastAPI的實例
 app = FastAPI()
 
 #測試連接
-@app.get("/")
+@app.post("/")
 def read_root():
-    return {"Hello": "World"}
+    models = os.listdir('ckpt')
+    return {model:'available' for model in models}
 
 
 # 處理上傳圖片的POST請求
@@ -37,7 +45,10 @@ def upload(
     try:
         Deep_model = eval(Deep_model)
 
-        # 從字典中取出選定的模型
+        if Model_name not in models:
+            models[Model_name] = load_model(Model_name)
+            print(f'>>>>> 讀取 {Model_name} YOLOv5 模型 <<<<<')
+
         model = models[Model_name]
         # 將模型移動到GPU上
         model.to("cuda")
@@ -75,18 +86,11 @@ if __name__ == "__main__":
 
     models={}
 
-    print('>>>>> 讀取YOLOv5 <<<<<')
-    models['LK FAB'] = torch.hub.load(
-        repo_or_dir = 'yolov5',
-        model = 'custom', 
-        path='models/TC3_PPE.pt', 
-        source='local')
-    
     print('>>>>> 讀取ZoeDepth距離檢測模型 <<<<<')
     model_zoe_n = torch.hub.load(repo_or_dir = ".", model = "ZoeD_N", source="local", pretrained=True)
         
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f'>>>>> 使用{DEVICE}進行運算 <<<<<')
+    print(f'>>>>> 使用 {DEVICE} 進行運算 <<<<<')
     
     zoe = model_zoe_n.to(DEVICE)
 

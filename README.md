@@ -18,12 +18,6 @@ run_servers.bat
 ```
 
 ```python
-git clone https://github.com/bensonbs/YOLOv5-ZoeDepth-ZST
-
-setup.bat
-
-run_servers.bat
-
 # API Demo
 file = 'Demo/3.png'
 

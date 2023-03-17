@@ -22,3 +22,4 @@
 ./whl/brotlipy-0.7.0-cp35-abi3-win_amd64.whl
 ./whl/ipykernel-6.21.3-py3-none-any.whl
 ./whl/timm-0.6.12-py3-none-any.whl
+./whl/python_multipart-0.0.6-py3-none-any.whl
