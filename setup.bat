@@ -9,8 +9,11 @@ set VENV_ID=1fPWyPXUjjAtv4O102O-FyH9aJqtk8G3o
 set DEPTH_MODEL_ID=1frT2jhdzcRee2Dg_P2bk4vfbpHzGdWcq
 set DEPTH_MODEL_PATH=hub\checkpoints\ZoeD_M12_N.pt
 
-set YOLO_MODEL_ID=1knO2a4j-qFWwZ7cbuNvDNnhQO0B5lz4f
-set YOLO_MODEL_PATH=models\TC3_PPE.pt
+set YOLO_MODEL_ID_LK=1knO2a4j-qFWwZ7cbuNvDNnhQO0B5lz4f
+set YOLO_MODEL_PATH_LK=models\LK-ENPD_72.pt
+
+set YOLO_MODEL_ID_TC3=1knO2a4j-qFWwZ7cbuNvDNnhQO0B5lz4f
+set YOLO_MODEL_PATH_TC3=models\TC3-PPE_Detector_v3.pt
 
 echo Creating virtual environment: %VENV_NAME% with Python: %PYTHON_EXE%
 %PYTHON_EXE% -m venv %VENV_NAME%
@@ -24,11 +27,19 @@ if not exist models (
     mkdir models
 )
 
-if exist %YOLO_MODEL_PATH% (
-    echo %YOLO_MODEL_PATH% already exists.
+if exist %YOLO_MODEL_PATH_LK% (
+    echo %YOLO_MODEL_PATH_LK% already exists.
 ) else (
     echo Downloading YOLO MODEL ...
-    gdown https://drive.google.com/uc?id=%YOLO_MODEL_ID% -O %YOLO_MODEL_PATH%
+    gdown https://drive.google.com/uc?id=%YOLO_MODEL_ID_LK% -O %YOLO_MODEL_PATH_LK%
+    echo Download complete.
+)
+
+if exist %YOLO_MODEL_PATH_TC3% (
+    echo %YOLO_MODEL_PATH_TC3% already exists.
+) else (
+    echo Downloading YOLO MODEL ...
+    gdown https://drive.google.com/uc?id=%YOLO_MODEL_ID_TC3% -O %YOLO_MODEL_PATH_TC3%
     echo Download complete.
 )
 
