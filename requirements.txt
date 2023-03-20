@@ -14,7 +14,6 @@
 ./whl/torch-1.13.1+cu116-cp39-cp39-win_amd64.whl
 ./whl/uvicorn-0.20.0-py3-none-any.whl
 ./whl/fastapi-0.89.1-py3-none-any.whl
-./whl/python-multipart-0.0.5.tar.gz
 ./whl/torchvision-0.14.1+cu116-cp39-cp39-win_amd64.whl
 ./whl/protobuf-3.20.1-cp39-cp39-win_amd64.whl
 ./whl/requests-2.28.2-py3-none-any.whl
