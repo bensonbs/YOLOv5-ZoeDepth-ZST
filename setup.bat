@@ -20,14 +20,29 @@ set YOLO_MODEL_PATH_TC3-PPE=models\TC3-PPE_Detector_v3.pt
 set YOLO_MODEL_ID_TC3-WaterColor=1zCCyAGwqTOPBmu5hSb6KjOF9dDYFU5so
 set YOLO_MODEL_PATH_TC3-WaterColor=models\TC3-WaterColor_v1.pt
 
-REM 創建虛擬環境
-echo 正在創建虛擬環境：%VENV_NAME%
-%PYTHON_EXE% -m venv %VENV_NAME%
+REM 下載並安裝依賴包
+if exist %VENV_NAME% (
+    echo %VENV_NAME% 已存在。
+) else (
+    echo 正在下載 %VENV_PATH%...
+    gdown https://drive.google.com/uc?id=%VENV_ID% -O %VENV_PATH%
+    echo 下載完成。
+    if not exist whl (
+        mkdir whl
+    )
+    echo whl.zip 解壓到 whl 文件夾。
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "& {Expand-Archive -Force package.zip .}"
+	REM 創建虛擬環境
+	echo 正在創建虛擬環境：%VENV_NAME%
+	%PYTHON_EXE% -m venv %VENV_NAME%
 
-echo 虛擬環境創建成功。
+	echo 虛擬環境創建成功。
 
-call %VENV_NAME%\Scripts\activate
-pip install gdown
+	call %VENV_NAME%\Scripts\activate
+	pip install gdown
+    echo 安裝相依套件
+    pip install --no-index --find-links ./whl -r requirements.txt
+)
 
 REM 下載模型
 if not exist models (
@@ -69,22 +84,6 @@ if exist %DEPTH_MODEL_PATH% (
     echo 正在下載 DEPTH MODEL ...
     gdown https://drive.google.com/uc?id=%DEPTH_MODEL_ID% -O %DEPTH_MODEL_PATH%
     echo 下載完成。
-)
-
-REM 下載並安裝依賴包
-if exist %VENV_NAME% (
-    echo %VENV_NAME% 已存在。
-) else (
-    echo 正在下載 %VENV_PATH%...
-    gdown https://drive.google.com/uc?id=%VENV_ID% -O %VENV_PATH%
-    echo 下載完成。
-    if not exist whl (
-        mkdir whl
-    )
-    echo whl.zip 解壓到 whl 文件夾。
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "& {Expand-Archive -Force package.zip .}"
-    echo 安裝相依套件
-    pip install --no-index --find-links ./whl -r requirements.txt
 )
 
 echo 自動移除安裝檔案
